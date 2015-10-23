@@ -23,6 +23,10 @@ body {
   color: rgb(0, 112, 210) !important;
 }
 
+table.transmissionTable {
+  background-color: rgba(0,0,255,0);
+}
+
 #map_canvas {
   height: 400px;
 }

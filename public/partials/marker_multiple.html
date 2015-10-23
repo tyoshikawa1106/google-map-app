@@ -1,0 +1,33 @@
+<div class="slds-p-around--large" style="background-color: rgb(21, 137, 238); color: #FFF;">
+  <h1 class="slds-text-heading--medium">GOOGLE MARKER</h1>
+</div>
+<div>
+  <h1 class="slds-text-heading--medium slds-p-top--large slds-p-left--small">- Marker -</h1>
+  <p class="slds-text-heading--xxx-samll slds-p-around--small">地図上に複数のマーカーを表示</p>
+  <div class="slds-p-around--small">
+    <table class="slds-table transmissionTable">
+      <tr>
+        <th>marker1.setMap()</th>
+        <td>
+          <input type="checkbox" id="marker1_check" value="true" checked />
+          表示 / 非表示
+        </td>
+      </tr>
+      <tr>
+        <th>marker2.icon = </th>
+        <td>
+          <input type="text" class="slds-input" id="marker2_txt" size="32" style="width: 150px;" />
+          <input type="button" id="marker2_btn" value="変更" class="slds-button slds-button--brand slds-button--small" />
+        </td>
+      </tr>
+      <tr>
+        <th>marker3の位置</th>
+        <td>
+          <input type="text" class="slds-input" id="marker3_txt" size="32" style="width: 150px;" />
+          <input type="button" id="marker3_btn" value="取得" class="slds-button slds-button--brand slds-button--small" />
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div id="map_canvas" class="helloMap"></div>
+</div>

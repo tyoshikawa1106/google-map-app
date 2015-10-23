@@ -6,3 +6,26 @@ body {
   background-color: rgb(244, 246, 249) !important;
   min-height: 100%;
 }
+
+#map_canvas {
+  height: 900px;
+}
+
+.helloMap {
+  height: 200px;
+}
+
+.sideMenu {
+  background-color: rgb(84, 105, 141);
+  color: #FFF;
+  min-height: 2000px;
+  min-width: 100px;
+}
+
+.sideMenu ul li a {
+  color: #FFF;
+  text-decoration: none;
+}
+.sideMenu ul li a:hover {
+  color: rgb(0, 112, 210) !important;
+}

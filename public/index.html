@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
   <head>
     <title>GOOGLE MAP SMAPLE APP</title>
-    <meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <link rel="stylesheet" href="stylesheets/style.css"></link>
     <link rel="stylesheet" href="vendor/SLDS092/assets/styles/salesforce-lightning-design-system.min.css"></link>
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-route/angular-route.js"></script>
+    <!-- Google Map API -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
   </head>
   <body ng-app="SampleApp">
     <div class="slds">
+      <!-- header -->
       <header class="site-masthead slds-grid slds-page-header slds-theme--inverse">
         <div class="slds-media__body slds-p-top--x-small">
           <h1 class="slds-text-heading--large">GOOGLE MAP SMAPLE APP</h1>
         </div>
       </header>
-      <div ng-view></div>
+      <div class="slds-grid slds-wrap">
+        <!-- Navi -->
+        <nav class="slds-col slds-size--2-of-12 sideMenu">
+          <ul class="slds-list--vertical slds-has-dividers">
+            <li class="slds-list__item nav-list"><a href="#/">Top</a></li>
+            <li class="slds-list__item nav-list"><a href="#/marker">Marker</a></li>
+          </ul>
+        </nav>
+        <!-- Main -->
+        <main class="slds-col slds-size--10-of-12">
+          <div ng-view></div>
+        </main>
+      </div>
     </div>
     <!-- javascript -->
     <script src="javascripts/app.js"></script>

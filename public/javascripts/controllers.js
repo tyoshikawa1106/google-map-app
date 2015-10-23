@@ -173,4 +173,47 @@ angular.module("Controllers", ["Services"])
   }
   // Google Map Initialze
   initialize();
+}])
+// ZoomEventController
+.controller("ZoomEventController", ["$scope", function($scope){
+  var mapCanvas;
+  var marker;
+  var infoWnd;
+  function initialize() {
+    var mapDiv = document.getElementById("map_canvas");
+    mapCanvas = new google.maps.Map(mapDiv, {
+      center : new google.maps.LatLng(35.679799, 139.762351,17),
+      zoom : 14,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    });
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(35.679799, 139.762351,17),
+      map: mapCanvas
+    });
+    marker.setMap(mapCanvas);
+
+    // Get HTML FORM BY BODY
+    var form = document.getElementById("markerPropertyForm");
+
+    // View InfoWindow
+    infoWnd = new google.maps.InfoWindow({
+      content : form
+    });
+    infoWnd.open(null, marker);
+  }
+  // Google Map Initialze
+  initialize();
+
+  // Change Zoom Level Change Icon
+  google.maps.event.addListener(mapCanvas, "zoom_changed", function() {
+    var zoom = mapCanvas.getZoom();
+    var iconSize = -(1/20) * zoom + 2;
+    var imgUrl = "https://chart.googleapis.com/chart?chst=d_map_spin&chld=" + iconSize + "|0|FF8429|23|b|" + zoom;
+    marker.setIcon(imgUrl);
+  });
+
+  // Change Zoom Level Change Form
+  google.maps.event.addListener(mapCanvas, "zoom_changed", function() {
+    infoWnd.setContent("現在のズームレベル : " + mapCanvas.getZoom());
+  });
 }]);

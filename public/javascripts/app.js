@@ -19,6 +19,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "InfoWindowInFormController",
     templateUrl : "/partials/info_window_in_form.html"
   }).
+  when("/zoom_event", {
+    controller : "ZoomEventController",
+    templateUrl : "/partials/zoom_event.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

@@ -165,12 +165,13 @@ angular.module("Controllers", ["Services"])
       content : form
     });
     infoWnd.open(null, marker);
-
-    function createMarker(opts) {
-      var marker = new google.maps.Marker(opts);
-      return marker;
-    }
   }
+
+  function createMarker(opts) {
+    var marker = new google.maps.Marker(opts);
+    return marker;
+  }
+  
   // Google Map Initialze
   initialize();
 }])

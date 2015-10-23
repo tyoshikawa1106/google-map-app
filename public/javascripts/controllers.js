@@ -111,4 +111,29 @@ angular.module("Controllers", ["Services"])
 
   // Google Map Initialze
   initialize();
+}])
+// InfoWindowController
+.controller("InfoWindowController", ["$scope", function($scope){
+  function initialize() {
+    var mapDiv = document.getElementById("map_canvas");
+    var mapCanvas = new google.maps.Map(mapDiv, {
+      center : new google.maps.LatLng(0, 0),
+      zoom : 14,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    });
+    var infoWnd = new google.maps.InfoWindow({
+      position: new google.maps.LatLng(0, 0)
+    });
+
+    var button = document.createElement("button");
+    button.innerText = "Please Click!!";
+    google.maps.event.addDomListener(button, "click", function() {
+      infoWnd.setContent("Hello World");
+    });
+
+    infoWnd.setContent(button);
+    infoWnd.open(mapCanvas);
+  }
+  // Google Map Initialze
+  initialize();
 }]);

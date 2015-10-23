@@ -11,6 +11,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "MarkerMultipleController",
     templateUrl : "/partials/marker_multiple.html"
   }).
+  when("/info_window", {
+    controller : "InfoWindowController",
+    templateUrl : "/partials/info_window.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

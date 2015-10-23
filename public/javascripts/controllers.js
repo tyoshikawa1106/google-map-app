@@ -142,22 +142,34 @@ angular.module("Controllers", ["Services"])
   function initialize() {
     var mapDiv = document.getElementById("map_canvas");
     var mapCanvas = new google.maps.Map(mapDiv, {
-      center : new google.maps.LatLng(0, 0),
-      zoom : 14,
+      center : new google.maps.LatLng(0.1, 0.1),
+      zoom : 10,
       mapTypeId : google.maps.MapTypeId.ROADMAP
     });
+
+    var marker = createMarker({
+      position : new google.maps.LatLng(0,0),
+      map : mapCanvas
+    });
+
+    // Get HTML FORM BY BODY
+    var form = document.getElementById("markerPropertyForm");
+    var changeBtn = document.getElementById("changeBtn");
+    var iconTxt = document.getElementById("iconTxt");
+    google.maps.event.addDomListener(changeBtn, "click", function(){
+      marker.setIcon(iconTxt.value);
+    });
+
+    // View InfoWindow
     var infoWnd = new google.maps.InfoWindow({
-      position: new google.maps.LatLng(0, 0)
+      content : form
     });
+    infoWnd.open(null, marker);
 
-    var button = document.createElement("button");
-    button.innerText = "Please Click!!";
-    google.maps.event.addDomListener(button, "click", function() {
-      infoWnd.setContent("Hello World");
-    });
-
-    infoWnd.setContent(button);
-    infoWnd.open(mapCanvas);
+    function createMarker(opts) {
+      var marker = new google.maps.Marker(opts);
+      return marker;
+    }
   }
   // Google Map Initialze
   initialize();

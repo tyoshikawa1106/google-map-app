@@ -43,6 +43,11 @@ angular.module("Controllers", ["Services"])
       zoom : 14,
       mapTypeId : google.maps.MapTypeId.ROADMAP
     });
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(35.679799, 139.762351,17),
+      map: mapCanvas
+    });
+    marker.setMap(mapCanvas);
   }
   // Google Map Initialze
   initialize();

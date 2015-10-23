@@ -1,3 +1,4 @@
+/** Common */
 html{
   height: 100%;
 }
@@ -5,14 +6,6 @@ html{
 body {
   background-color: rgb(244, 246, 249) !important;
   min-height: 100%;
-}
-
-#map_canvas {
-  height: 900px;
-}
-
-.helloMap {
-  height: 200px;
 }
 
 .sideMenu {
@@ -28,4 +21,13 @@ body {
 }
 .sideMenu ul li a:hover {
   color: rgb(0, 112, 210) !important;
+}
+
+#map_canvas {
+  height: 400px;
+}
+
+/** Home **/
+.helloMap {
+  height: 200px;
 }

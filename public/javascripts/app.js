@@ -15,6 +15,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "InfoWindowController",
     templateUrl : "/partials/info_window.html"
   }).
+  when("/info_window_in_form", {
+    controller : "InfoWindowInFormController",
+    templateUrl : "/partials/info_window_in_form.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

@@ -8,6 +8,11 @@ body {
   min-height: 100%;
 }
 
+.partialsHeader {
+  background-color: rgb(21, 137, 238);
+  color: #FFF;
+}
+
 .sideMenu {
   background-color: rgb(84, 105, 141);
   color: #FFF;

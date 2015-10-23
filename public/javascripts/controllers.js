@@ -216,4 +216,47 @@ angular.module("Controllers", ["Services"])
   google.maps.event.addListener(mapCanvas, "zoom_changed", function() {
     infoWnd.setContent("現在のズームレベル : " + mapCanvas.getZoom());
   });
+}])
+// MapEventController
+.controller("MapEventController", ["$scope", function($scope){
+
+  var mapEvents = ["bounds_changed", "center_changed", "click", "dblclick",
+                    "drag", "dragend", "dragstart", "maptypeid_changed",
+                      "mousemove", "mouseout", "mouseover", "zoom_changed"];
+
+  function initialize() {
+    var mapDiv = document.getElementById("map_canvas");
+    var mapCanvas = new google.maps.Map(mapDiv, {
+      center : new google.maps.LatLng(35, 136),
+      zoom : 5,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    });
+
+    var loop = new google.maps.MVCArray(mapEvents);
+    loop.forEach(function(evtName, i) {
+      google.maps.event.addListener(mapCanvas, evtName, function(arg) {
+        pushToEvtList(evtName, arg);
+      });
+    });
+  }
+
+  function pushToEvtList(evtName, arg) {
+    var evtList = document.getElementById("evtList");
+    var date = new Date();
+    var div = document.createElement("div");
+    div.style.borderBottom = "1px dotted gray";
+    div.style.whiteSpace = "nowrap";
+    var txt = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + evtName;
+    if (arg !== undefined) {
+      txt += "&nbsp;&nbsp;&nbsp;";
+      for (var pName in arg) {
+        txt += "&nbsp;&nbsp;&nbsp;" + pName + " : " + arg[pName].toString() + ",";
+      }
+    }
+    div.innerHTML += txt;
+    evtList.appendChild(div);
+  }
+
+  // Google Map Initialze
+  initialize();
 }]);

@@ -23,6 +23,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "ZoomEventController",
     templateUrl : "/partials/zoom_event.html"
   }).
+  when("/map_event", {
+    controller : "MapEventController",
+    templateUrl : "/partials/map_event.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

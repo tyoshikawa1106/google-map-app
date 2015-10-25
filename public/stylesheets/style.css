@@ -33,6 +33,7 @@ body {
   color: #FFF;
   text-decoration: none;
   display:block;
+  font-weight: bold;
 }
 .sideMenu ul li a:hover {
   color: rgb(0, 112, 210) !important;

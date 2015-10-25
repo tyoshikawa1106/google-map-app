@@ -43,6 +43,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "RouteSearchController",
     templateUrl : "/partials/root_search.html"
   }).
+  when("/elevation", {
+    controller : "ElevationController",
+    templateUrl : "/partials/elevation.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

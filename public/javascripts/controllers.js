@@ -455,4 +455,64 @@ angular.module("Controllers", ["Services"])
 
   // Google Map Initialze
   initialize();
+}])
+// ElevationController
+.controller("ElevationController", ["$scope", function($scope){
+  var mapCanvas, elevationService, directionsDisplay;
+  function initialize() {
+    var initPos = new google.maps.LatLng(35.3, 138.7);
+    var mapOptions = {
+      center : initPos,
+      zoom : 10,
+      mapTypeId : google.maps.MapTypeId.TERRAIN
+    };
+    mapCanvas = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    var path = [
+      new google.maps.LatLng(35.221418, 138.614952),
+      new google.maps.LatLng(35.362876, 138.731575),
+      new google.maps.LatLng(35.483528, 138.795814)
+    ];
+
+    chart = new google.visualization.ColumnChart(document.getElementById('elevation_chart'));
+
+    var polyline = new google.maps.Polyline({
+      path: path,
+      map: mapCanvas,
+      strokeColor: "white",
+      strokeWeight: 5
+    });
+
+    var request = {
+      path: path,
+      samples: 256
+    };
+    elevationService = new google.maps.ElevationService();
+    elevationService.getElevationAlongPath(request, callback_elevation);
+  }
+
+  function callback_elevation(results, status) {
+    if (status == google.maps.ElevationStatus.OK) {
+      var elevationPath = [];
+      for (var i = 0; i < results.length; i++) {
+        elevationPath.push(results[i].location);
+      }
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Sample');
+      data.addColumn('number', 'Elevation');
+      for (var i = 0; i < results.length; i++) {
+        data.addRow(['', results[i].elevation]);
+      }
+
+      chart.draw(data, {
+        width: 640,
+        height: 200,
+        legend: 'none',
+        titleY: '海抜(m)'
+      });
+    }
+  }
+  // Google Map Initialze
+  initialize();
 }]);

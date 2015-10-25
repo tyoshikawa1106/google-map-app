@@ -10,6 +10,7 @@
     <script src="vendor/angular-route/angular-route.js"></script>
     <!-- Google Map API -->
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3&langRegion=ja-jp&region=jp"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   </head>
   <body ng-app="SampleApp">
     <div class="slds">
@@ -34,6 +35,7 @@
             <li class="slds-list__item nav-list"><a href="#/polyline">Polyline</a></li>
             <li class="slds-list__item nav-list"><a href="#/geocode">Geocode</a></li>
             <li class="slds-list__item nav-list"><a href="#/route_search">Route Search</a></li>
+            <li class="slds-list__item nav-list"><a href="#/elevation">Elevation</a></li>
           </ul>
         </nav>
         <!-- Main -->
@@ -47,5 +49,8 @@
     <script src="javascripts/controllers.js"></script>
     <script src="javascripts/services.js"></script>
     <script src="javascripts/directives.js"></script>
+    <script>
+      google.load("visualization", "1", {packages: ["columnchart"]});
+    </script>
   </body>
 </html>

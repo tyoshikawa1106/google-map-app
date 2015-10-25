@@ -31,6 +31,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "MVCObjectController",
     templateUrl : "/partials/mvc_object.html"
   }).
+  when("/polyline", {
+    controller : "PolylineController",
+    templateUrl : "/partials/polyline.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

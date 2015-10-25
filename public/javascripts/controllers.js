@@ -301,4 +301,47 @@ angular.module("Controllers", ["Services"])
 
   // Google Map Initialze
   initialize();
+}])
+// PolylineController
+.controller("PolylineController", ["$scope", function($scope){
+  function initialize() {
+    var mapDiv = document.getElementById("map_canvas");
+    var mapCanvas = new google.maps.Map(mapDiv, {
+      center : new google.maps.LatLng(0, 0),
+      zoom : 8,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    });
+
+    var polyline = new google.maps.Polyline({
+      map : mapCanvas,
+      path : [
+        new google.maps.LatLng(0,0),
+        new google.maps.LatLng(1,1),
+        new google.maps.LatLng(0,2)
+      ],
+      strokeColor : "green",
+      stokeOpacity : 1,
+      stokeWeight : 5
+    });
+
+    var linePath = polyline.getPath();
+    linePath.forEach(function(latlng, i) {
+      var marker = createMarker({
+        map : mapCanvas,
+        draggable : true,
+        position : latlng
+      });
+      google.maps.event.addListener(marker, "position_changed", function() {
+        linePath.setAt(i, this.position);
+      });
+    });
+  }
+
+  function createMarker(opts) {
+    var marker = new google.maps.Marker(opts);
+    return marker;
+  }
+
+  // Google Map Initialze
+  initialize();
 }]);

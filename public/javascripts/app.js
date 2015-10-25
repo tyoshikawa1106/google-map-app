@@ -35,6 +35,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "PolylineController",
     templateUrl : "/partials/polyline.html"
   }).
+  when("/geocode", {
+    controller : "GeocodeController",
+    templateUrl : "/partials/geocode.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

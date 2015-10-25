@@ -1,0 +1,17 @@
+<div class="slds-p-around--large partialsHeader">
+  <h1 class="slds-text-heading--medium">GOOGLE MAP - GEOCODE</h1>
+</div>
+<div>
+  <h1 class="slds-text-heading--medium slds-p-top--large slds-p-left--small">- GEOCODE -</h1>
+  <p class="slds-text-heading--xxx-samll slds-p-around--small">ジオコーディングと逆ジオコーディング</p>
+  <form method="get">
+    <div class="slds-form-element slds-p-around--small">
+      <label class="slds-form-element__label" for="address">address or place name, etc...</label>
+      <div class="slds-form-element__control">
+        <input type="text" class="slds-input" id="address" value="Tokyo Tower" style="max-width: 500px;" />
+        <input type="button" id="doGeocode" value="Geocodeing" class="slds-button slds-button--brand slds-button--small" />
+      </div>
+    </div>
+  </form>
+  <div id="map_canvas"></div>
+</div>

@@ -344,4 +344,80 @@ angular.module("Controllers", ["Services"])
 
   // Google Map Initialze
   initialize();
+}])
+// GeocodeController
+.controller("GeocodeController", ["$scope", function($scope){
+  var mapCanvas, marker, geocoder, infoWnd;
+  function initialize() {
+    var initPos = new google.maps.LatLng(0,0);
+    mapCanvas = new google.maps.Map(document.getElementById("map_canvas"), {
+      center : initPos,
+      zoom : 3,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    });
+    console.log(mapCanvas);
+    geocoder = new google.maps.Geocoder();
+    infoWnd = new google.maps.InfoWindow();
+    marker = createMarker({
+      map : mapCanvas,
+      //position : new google.maps.LatLng(0,0),
+      draggable : true
+    });
+    google.maps.event.addListener(marker, "dragend", doReverseGeocode);
+    var geocodeBtn = document.getElementById("doGeocode");
+    google.maps.event.addDomListener(geocodeBtn, "click", doGeocode);
+  }
+
+  function doGeocode(mouseEvt) {
+    var request = {
+      address : document.getElementById("address").value
+    };
+    geocoder.geocode(request, function(results, status) {
+      callback_geododer(results, status, false);
+    });
+  }
+
+  function doReverseGeocode(mouseEvt) {
+    marker.setPosition(mouseEvt.latLng);
+    var request = {
+      location : mouseEvt.latLng
+    };
+    geocoder.geocode(request, function(results, status) {
+      callback_geododer(results, status, true);
+    });
+  }
+
+  function callback_geododer(results, status, isReverseGeocode) {
+    if (status ==  google.maps.GeocoderStatus.OK) {
+      var result = results[0];
+
+      google.maps.event.addListenerOnce(mapCanvas, "center_changed", function() {
+        marker.setPosition(result.geometry.location);
+        var txt = "latlng:" + result.geometry.location.toUrlValue() + "<br/>" + "address:" + result.formatted_address;
+        infoWnd.setContent(txt);
+        infoWnd.open(mapCanvas, marker);
+      });
+
+      if (isReverseGeocode == true) {
+        mapCnvas.panTo(result.geometry.location);
+      } else {
+        if ("viewport" in result.geometry) {
+          mapCanvas.fitBounds(result.geometry.viewport);
+        } else if ("bounds" in result.geometry) {
+          mapCanvas.fitBounds(result.geometry.bounds);
+        }
+      }
+    } else {
+      alert("Code:" + status);
+    }
+  }
+
+  function createMarker(opts) {
+    var marker = new google.maps.Marker(opts);
+    console.log(marker);
+    return marker;
+  }
+
+  // Google Map Initialze
+  initialize();
 }]);

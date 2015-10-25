@@ -27,6 +27,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "MapEventController",
     templateUrl : "/partials/map_event.html"
   }).
+  when("/mvc_object", {
+    controller : "MVCObjectController",
+    templateUrl : "/partials/mvc_object.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

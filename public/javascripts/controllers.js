@@ -161,10 +161,10 @@ angular.module("Controllers", ["Services"])
     });
 
     // View InfoWindow
-    var infoWnd = new google.maps.InfoWindow({
-      content : form
-    });
-    infoWnd.open(null, marker);
+    //var infoWnd = new google.maps.InfoWindow({
+    //  content : form
+    //});
+    //infoWnd.open(null, marker);
   }
 
   function createMarker(opts) {
@@ -256,6 +256,47 @@ angular.module("Controllers", ["Services"])
     }
     div.innerHTML += txt;
     evtList.appendChild(div);
+  }
+
+  // Google Map Initialze
+  initialize();
+}])
+// MVCObjectController
+.controller("MVCObjectController", ["$scope", function($scope){
+  function initialize() {
+    var mapDiv = document.getElementById("map_canvas");
+    var mapCanvas = new google.maps.Map(mapDiv, {
+      center : new google.maps.LatLng(0.1, 0.1),
+      zoom : 8,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    });
+    
+    var marker = createMarker({
+      position : new google.maps.LatLng(0,0),
+      map : mapCanvas
+    });
+
+    var mvcObject = new google.maps.MVCObject();
+    mvcObject.set("visible", true);
+
+    var markerCheckbox = document.getElementById("markerChkbox");
+    google.maps.event.addDomListener(markerChkbox, "click", function() {
+      mvcObject.set("visible", markerChkbox.checked);
+    });
+
+    var center = mapCanvas.getCenter();
+    for (var i = 0; i < 10; i++) {
+      var marker = createMarker({
+        position : new google.maps.LatLng(center.lat() + Math.random() * 3 - 1.5, center.lng() + Math.random() * 3 - 1.5),
+        map : mapCanvas
+      });
+      marker.bindTo("visible", mvcObject, "visible", true);
+    }
+  }
+
+  function createMarker(opts) {
+    var marker = new google.maps.Marker(opts);
+    return marker;
   }
 
   // Google Map Initialze

@@ -39,6 +39,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "GeocodeController",
     templateUrl : "/partials/geocode.html"
   }).
+  when("/route_search", {
+    controller : "RouteSearchController",
+    templateUrl : "/partials/root_search.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

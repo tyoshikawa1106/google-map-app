@@ -420,4 +420,39 @@ angular.module("Controllers", ["Services"])
 
   // Google Map Initialze
   initialize();
+}])
+// RouteSearchController
+.controller("RouteSearchController", ["$scope", function($scope){
+  var mapCanvas;
+  function initialize() {
+    var initPos = new google.maps.LatLng(35.658613, 139.745525);
+    var mapOptions = {
+      center : initPos,
+      zoom : 16,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+    };
+
+    mapCanvas = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    var request = {
+      origin : "東京駅",
+      destination : "東京タワー",
+      travelMode : google.maps.DirectionsTravelMode.DRIVING
+    };
+
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, callback_direction);
+  }
+
+  function callback_direction(result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      var directionsDisplay = new google.maps.DirectionsRenderer({
+        map : mapCanvas
+      });
+      directionsDisplay.setDirections(result);
+    }
+  }
+
+  // Google Map Initialze
+  initialize();
 }]);

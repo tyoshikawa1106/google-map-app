@@ -617,9 +617,7 @@ angular.module("Controllers", ["Services"])
 
     // Create Auto Complete
     var input = document.getElementById('search');
-    console.log(input);
     var autocomplete = new google.maps.places.Autocomplete(input);
-    console.log(autocomplete);
 
     mapCanvas.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     google.maps.event.addListener(mapCanvas, "bounds_chaged", function() {

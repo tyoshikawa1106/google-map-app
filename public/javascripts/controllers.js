@@ -355,14 +355,14 @@ angular.module("Controllers", ["Services"])
       zoom : 3,
       mapTypeId : google.maps.MapTypeId.ROADMAP
     });
-    console.log(mapCanvas);
+    
     geocoder = new google.maps.Geocoder();
     infoWnd = new google.maps.InfoWindow();
     marker = createMarker({
       map : mapCanvas,
-      //position : new google.maps.LatLng(0,0),
       draggable : true
     });
+
     google.maps.event.addListener(marker, "dragend", doReverseGeocode);
     var geocodeBtn = document.getElementById("doGeocode");
     google.maps.event.addDomListener(geocodeBtn, "click", doGeocode);
@@ -414,7 +414,6 @@ angular.module("Controllers", ["Services"])
 
   function createMarker(opts) {
     var marker = new google.maps.Marker(opts);
-    console.log(marker);
     return marker;
   }
 
@@ -513,6 +512,94 @@ angular.module("Controllers", ["Services"])
       });
     }
   }
+  // Google Map Initialze
+  initialize();
+}])
+// StreetViewController
+.controller("StreetViewController", ["$scope", function($scope){
+  var streetViewPanorama, mapCanvas, lastSvLatLng;
+  function initialize() {
+    var initPos = new google.maps.LatLng(33.503441, 130.406008);
+    var mapOptions = {
+      center : initPos,
+      zoom : 15,
+      mapTypeId : google.maps.MapTypeId.ROADMAP,
+      streetViewControl : false,
+      noClear : true
+    };
+    var mapDiv = document.getElementById("map_canvas");
+    mapCanvas = new google.maps.Map(mapDiv, mapOptions);
+
+    var marker = createMarker({
+      map : mapCanvas,
+      draggable : true,
+      position : initPos,
+      zIndex : google.maps.Marker.MAX_ZINDEX
+    });
+    
+    marker.set("drag", false);
+    google.maps.event.addListener(marker, "dragend", function(mouseEvent) {
+      mapCanvas.panTo(mouseEvent.latLng);
+    });
+
+    var streetViewDiv = document.getElementById("streetview_canvas");
+    streetViewPanorama = new google.maps.StreetViewPanorama(streetViewDiv, {
+      disableDoubleClickZoom : true,
+      enableCloseButton : false,
+      linksControl : false,
+      addressControl : false,
+      zoomControl : false,
+      panControl : false
+    });
+
+    google.maps.event.addListenerOnce(streetViewPanorama, "position_changed", function() {
+      streetViewDiv.style.visibility = "visible";
+    });
+
+    streetViewInfoWnd = new google.maps.InfoWindow({
+      content : streetViewDiv,
+      disableAutoPan : true
+    });
+
+    var circle = new google.maps.Circle({
+      radius : 500,
+      clickable : false
+    });
+
+    circle.bindTo("center", marker, "position");
+    google.maps.event.addListener(marker, "dragstart", function() {
+      circle.setMap(mapCanvas);
+    });
+
+    google.maps.event.addListener(marker, "dragend", function() {
+      circle.setMap(null);
+    });
+
+    var streetViewService = new google.maps.StreetViewService();
+    google.maps.event.addListener(marker, "position_changed", function() {
+      streetViewService.getPanoramaByLocation(this.position, 500, callback_getPanoramaByLocation);
+    });
+  }
+
+  function callback_getPanoramaByLocation(svPanoramaData, svStatus) {
+    if (svStatus == google.maps.StreetViewStatus.OK) {
+      var lastSVpos = streetViewPanorama.getPosition();
+      var newSVpos = svPanoramaData.location.latLng;
+      if (newSVpos.equals(lastSVpos) == false) {
+        streetViewPanorama.setPosition(newSVpos);
+        streetViewInfoWnd.setPosition(newSVpos);
+        streetViewInfoWnd.open(mapCanvas);
+      }
+    } else {
+      streetViewInfoWnd.close();
+    }
+  }
+
+  function createMarker(opts) {
+    var marker = new google.maps.Marker(opts);
+    return marker;
+  }
+
   // Google Map Initialze
   initialize();
 }]);

@@ -47,6 +47,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "ElevationController",
     templateUrl : "/partials/elevation.html"
   }).
+  when("/street_view", {
+    controller : "StreetViewController",
+    templateUrl : "/partials/street_view.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

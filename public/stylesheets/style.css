@@ -47,7 +47,13 @@ table.transmissionTable {
   height: 400px;
 }
 
-/** Home **/
+#streetview_canvas {
+  width: 200px;
+  height: 200px;
+  visibility: hidden;
+}
+
 .helloMap {
   height: 200px;
 }
+

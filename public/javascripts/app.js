@@ -55,6 +55,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "AutoCompleteController",
     templateUrl : "/partials/auto_complete.html"
   }).
+  when("/panoramio", {
+    controller : "PanoramioController",
+    templateUrl : "/partials/panoramio.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

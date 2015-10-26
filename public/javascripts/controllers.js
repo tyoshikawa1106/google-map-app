@@ -640,4 +640,56 @@ angular.module("Controllers", ["Services"])
   }
   // Google Map Initialze
   initialize();
+}])
+// PanoramioController
+.controller("PanoramioController", ["$scope", function($scope){
+  function initialize() {
+    var initPos = new google.maps.LatLng(35, 136);
+    var mapOptions = {
+      center : initPos,
+      zoom : 6,
+      mapTypeId : google.maps.MapTypeId.ROADMAP,
+      noClear : true
+    };
+    var mapDiv = document.getElementById("map_canvas");
+    var mapCanvas = new google.maps.Map(mapDiv, mapOptions);
+
+    // Panoramio Layer
+    var panoramioLayer = new google.maps.panoramio.PanoramioLayer({
+      map : mapCanvas,
+      suppressInfoWindows: true
+    });
+
+    var panoramio_frame = document.getElementById("panoramio_widget");
+    google.maps.event.addListener(panoramioLayer, "click", function(mouseEvt) {
+      var feature = mouseEvt.featureDetails;
+      console.log(feature);
+      var request = {
+        ids : [
+          {
+            'photoId': parseInt(feature.photoId, 10),
+            'userId' : parseInt(feature.userId, 10)
+          }
+        ]
+      };
+
+      var body = document.getElementsByIdTagName("body")[0];
+      var photoW = Math.floor(body.offsetWidth / 3 * 2);
+      var photoH = Math.floor(body.offsetHeight / 10 * 9);
+      widget_div.style.width = photoW + "px";
+      widget_div.style.height = photoH + "px";
+
+      var widgetOpts = {'width': photoW, 'height': phootH};
+      var widget = new panoramio.PhotoWidget('panoramio_widget', request, widgetOpts);
+      panoramio_frame.style.display = "block";
+      widget.setPosition(0);
+    });
+
+    // Close Button
+    google.maps.event.addDomListener(closeBtn, "click", function() {
+      panoramio_frame.style.display = "none";
+    });
+  }
+  // Google Map Initialze
+  initialize();
 }]);

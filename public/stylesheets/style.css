@@ -60,3 +60,17 @@ table.transmissionTable {
 .autoCompleteInput {
   width: 600px !important;
 }
+
+#panoramio_frame {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: black;
+}
+#panoramio_widget {
+  margin: auto;
+}

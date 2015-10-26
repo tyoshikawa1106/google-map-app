@@ -602,4 +602,42 @@ angular.module("Controllers", ["Services"])
 
   // Google Map Initialze
   initialize();
+}])
+// AutoCompleteController
+.controller("AutoCompleteController", ["$scope", function($scope){
+  function initialize() {
+    var initPos = new google.maps.LatLng(35.658613, 139.745525);
+    var mapOptions = {
+      center : initPos,
+      zoom : 15,
+      mapTypeId : google.maps.MapTypeId.ROADMAP,
+      noClear : true
+    };
+    var mapCanvas = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    // Create Auto Complete
+    var input = document.getElementById('search');
+    console.log(input);
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    console.log(autocomplete);
+
+    mapCanvas.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    google.maps.event.addListener(mapCanvas, "bounds_chaged", function() {
+      autocomplete.setBounds(mapCanvas.getBounds());
+    });
+    autocomplete.setBounds(mapCanvas.getBounds());
+
+    // Select Auto Complete
+    google.maps.event.addListener(autocomplete, "place_changed", function() {
+      var place = autocomplete.getPlace();
+      if (place.geometry.viewport) {
+        mapCanvas.fitBounds(place.geometry.viewport);
+      } else {
+        mapCanvas.setCenter(place.geometry.location);
+        mapCanvas.setZoom(17);
+      }
+    });
+  }
+  // Google Map Initialze
+  initialize();
 }]);

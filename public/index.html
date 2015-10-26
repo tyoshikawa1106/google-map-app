@@ -9,7 +9,7 @@
     <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
     <script type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
     <!-- Google Map API -->
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3&langRegion=ja-jp&region=jp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3&langRegion=ja-jp&region=jp&amp;libraries=places"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   </head>
   <body ng-app="SampleApp">
@@ -37,6 +37,7 @@
             <li class="slds-list__item nav-list"><a href="#/route_search">Route Search</a></li>
             <li class="slds-list__item nav-list"><a href="#/elevation">Elevation</a></li>
             <li class="slds-list__item nav-list"><a href="#/street_view">Street View</a></li>
+            <li class="slds-list__item nav-list"><a href="#/auto_complete">Auto Complete</a></li>
           </ul>
         </nav>
         <!-- Main -->

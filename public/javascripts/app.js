@@ -51,6 +51,10 @@ angular.module("SampleApp", ["Controllers", "ngRoute", "Directives"]).config(["$
     controller : "StreetViewController",
     templateUrl : "/partials/street_view.html"
   }).
+  when("/auto_complete", {
+    controller : "AutoCompleteController",
+    templateUrl : "/partials/auto_complete.html"
+  }).
   otherwise({
     redirectTo: "/"
   });

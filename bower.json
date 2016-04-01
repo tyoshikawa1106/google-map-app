@@ -1,0 +1,25 @@
+{
+  "name": "google_map_app",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Taiki Yoshikawa"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/tyoshikawa1106/google-map-app",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-resource": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular": "~1.4.7",
+    "jquery": "~2.1.4"
+  }
+}
